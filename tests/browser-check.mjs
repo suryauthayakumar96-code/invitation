@@ -1,0 +1,72 @@
+import { chromium } from '@playwright/test';
+import assert from 'node:assert/strict';
+import { mkdir } from 'node:fs/promises';
+await mkdir('artifacts', { recursive: true });
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const errors = [];
+const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+page.on('pageerror', e => { errors.push(e.message); console.log('PAGE ERROR:', e.message); });
+page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+await page.goto('http://localhost:5173', { waitUntil: 'networkidle' });
+if ((await page.title()).startsWith('Warning:')) {
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.waitForLoadState('networkidle');
+  await page.goto('http://localhost:5173', { waitUntil: 'networkidle' });
+}
+console.log('Page loaded:', await page.title());
+await page.screenshot({ path: 'artifacts/initial.png' });
+await page.getByRole('button', { name: 'Open Invitation' }).waitFor();
+await page.screenshot({ path: 'artifacts/welcome-desktop.png' });
+assert.equal(await page.locator('main').count(), 0, 'Invitation stays closed until clicked');
+await page.getByRole('button', { name: 'Open Invitation' }).click();
+await page.getByRole('button', { name: 'Pause music' }).waitFor();
+await page.waitForTimeout(2200);
+await page.screenshot({ path: 'artifacts/hero-desktop.png' });
+const initialTempleTransform = await page.locator('.temple-sky-art').evaluate(el => getComputedStyle(el).transform);
+await page.evaluate(() => window.scrollTo({ top: 420, behavior: 'instant' }));
+await page.waitForTimeout(1300);
+assert.notEqual(await page.locator('.temple-sky-art').evaluate(el => getComputedStyle(el).transform), initialTempleTransform, 'Temple responds to scroll');
+assert.ok(Number(await page.locator('.sky-names').evaluate(el => getComputedStyle(el).opacity)) < .95, 'Hero names recede with scroll');
+await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+await page.getByRole('button', { name: 'Pause music' }).click();
+await page.getByRole('button', { name: 'Play music' }).click();
+assert.equal(await page.getByRole('button', { name: 'Pause music' }).getAttribute('aria-pressed'), 'true');
+assert.match(await page.getByRole('link', { name: 'Open in Google Maps' }).getAttribute('href'), /maps\/search/);
+assert.equal(await page.locator('a[href*="wa.me"]').count(), 0);
+const downloadPromise = page.waitForEvent('download');
+await page.getByRole('button', { name: 'Add Wedding to Calendar' }).click();
+const download = await downloadPromise;
+assert.equal(download.suggestedFilename(), 'our-wedding.ics');
+await download.saveAs('artifacts/our-wedding.ics');
+assert.ok(Number(await page.locator('.countdown-digits>div:first-child span').innerText()) >= 0);
+for (const width of [360,375,390,430,768,1024,1440]) {
+  await page.setViewportSize({ width, height: 900 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  for (const section of await page.locator('main>section').all()) {
+    await section.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(110);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+    assert.equal(overflow, false, `No horizontal overflow at ${width}px`);
+  }
+  console.log(`Layout and scrolling passed: ${width}px`);
+}
+await page.setViewportSize({ width: 390, height: 844 });
+await page.evaluate(() => window.scrollTo(0, 0));
+await page.waitForTimeout(1000);
+await page.screenshot({ path: 'artifacts/hero-mobile.png' });
+await page.screenshot({ path: 'artifacts/full-mobile.png', fullPage: true });
+await page.setViewportSize({ width: 1440, height: 1000 });
+await page.screenshot({ path: 'artifacts/full-desktop.png', fullPage: true });
+const reduced = await browser.newPage({ viewport: { width: 375, height: 812 }, reducedMotion: 'reduce' });
+await reduced.goto('http://localhost:5173');
+await reduced.getByRole('button', { name: 'Open Invitation' }).click();
+await reduced.locator('.welcome').waitFor({ state: 'detached', timeout: 500 });
+assert.equal(await reduced.locator('.hero .petals').evaluate(el => getComputedStyle(el).display), 'none');
+assert.equal(await reduced.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior), 'auto');
+await reduced.locator('#celebration').scrollIntoViewIfNeeded();
+await reduced.waitForTimeout(300);
+await reduced.screenshot({ path: 'artifacts/ceremony-mobile.png' });
+await reduced.close();
+await browser.close();
+assert.deepEqual(errors, [], 'No browser console errors');
+console.log('Opening, audio, calendar download, Maps, hidden WhatsApp, countdown, reduced motion and console checks passed.');
