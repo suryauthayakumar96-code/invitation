@@ -58,6 +58,6 @@ Animations honour reduced motion. Layouts support 360px and up, with semantic se
 
 ## Verification
 
-`npm test` checks timezone-aware countdowns, post-wedding clamping, standards-compliant calendar content and WhatsApp message encoding. With the dev server running and Google Chrome installed, `node tests/browser-check.mjs` checks the opening, audio control state, calendar download, directions, countdown, hidden WhatsApp, reduced motion and overflow at 360, 375, 390, 430, 768, 1024 and 1440 pixels. It saves screenshots into `artifacts/`. `node tests/gallery-check.mjs` uses intercepted image fixtures to check lightbox navigation, keyboard focus trapping and restoration without changing your configured photos.
+`npm test` checks timezone-aware countdowns, post-wedding clamping, standards-compliant calendar content and WhatsApp message encoding. With the dev server running and Google Chrome installed, `node tests/browser-check.mjs` checks the opening, audio control state, calendar download, directions, countdown, hidden WhatsApp, reduced motion and overflow at 360, 375, 390, 430, 768, 1024 and 1440 pixels. It saves screenshots into `artifacts/`. `node tests/gallery-check.mjs` uses the configured gallery images to check lightbox navigation, keyboard focus trapping and restoration.
 
 These are desktop Chrome viewport emulations, not physical iPhone/Android device tests. No Lighthouse score is claimed.
