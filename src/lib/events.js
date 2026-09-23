@@ -13,7 +13,10 @@ export function downloadCalendar(details) {
   const url = URL.createObjectURL(new Blob([createCalendar(details)], { type: 'text/calendar;charset=utf-8' }));
   const link = document.createElement('a'); link.href = url; link.download = 'our-wedding.ics'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-export function whatsappUrl(details, wishes = false) {
+export function whatsappUrl(details, wishes = false, guest = {}) {
   const text = `Hi ${details.groom} & ${details.bride} ❤️\n\n${wishes ? 'Wishing you a lifetime of love and happiness as you begin this beautiful journey together!' : `I'll be happy to join you for your wedding on ${details.date}.`}`;
-  return `https://wa.me/${details.whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`;
+  const name = String(guest.name || '').trim().slice(0, 100);
+  const count = Math.max(1, Math.min(10, Number.parseInt(guest.count, 10) || 1));
+  const introduction = !wishes && name ? `\n\nGuest name: ${name}\nNumber attending: ${count}${guest.note?.trim() ? `\nNote: ${guest.note.trim().slice(0, 500)}` : ''}` : '';
+  return `https://wa.me/${String(details.whatsappNumber || '').replace(/\D/g, '')}?text=${encodeURIComponent(text + introduction)}`;
 }

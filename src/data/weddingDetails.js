@@ -3,14 +3,14 @@ export const weddingDetails = {
   groom: 'Surya', bride: 'Kuralarasi',
   date: '25 October 2026', day: 'Sunday',
   // Include the timezone offset so guests everywhere see the same countdown.
-  startAt: '2026-10-25T09:00:00+05:30',
-  endAt: '2026-10-25T10:30:00+05:30',
+  startAt: '2026-10-25T09:45:00+05:30',
+  endAt: '2026-10-25T11:45:00+05:30',
   muhurtham: '09:45 AM – 11:45 AM', reception: '', timezoneLabel: 'India Standard Time',
   venue: 'SwamiMalai Murugan Kovil', location: 'Thanjavur, Tamil Nadu',
   tamilHeading: 'முருகன் துணை',
   mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sami+Malai+Murugan+Kovil+Thanjavur+Tamil+Nadu',
   // Country code + number, digits only, e.g. 919876543210. Blank uses WhatsApp's contact picker.
-  whatsappNumber: '',
+  whatsappNumber: '918946075119',
   music: { src: '', volume: 0.25 }, // e.g. /music/wedding-theme.mp3; blank plays a quiet original ambient melody.
   photos: { temple: '', groom: '/photos/groom.jpg', bride: '/photos/bride.jpg', couple: '/photos/couple-together.png' },
   // Original illustration assets; actual venue photos belong in photos.temple.
@@ -21,6 +21,8 @@ export const weddingDetails = {
     { src: '/photos/couple-together.png', alt: 'Illustration of us smiling together beside a blue doorway', caption: 'Together is our favourite place', shape: 'landscape', aspectRatio: '1448 / 1086' },
   ],
   copy: {
+    storyHeading: 'My favourite place is next to you.',
+    story: 'In the everyday moments, the shared laughter, and every new adventure — we found our forever.',
     invitation: 'Together with our families',
     invitationSecond: 'we invite you to celebrate the wedding of',
     couple: 'Two souls, one journey. With hearts full of love and the blessings of our families, we begin a beautiful new chapter together.',

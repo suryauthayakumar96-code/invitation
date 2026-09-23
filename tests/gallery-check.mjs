@@ -2,13 +2,14 @@ import { chromium } from '@playwright/test';
 import assert from 'node:assert/strict';
 import { weddingDetails } from '../src/data/weddingDetails.js';
 const galleryImages = weddingDetails.gallery.filter(photo => photo.src);
+const baseURL = process.argv[2] || 'http://localhost:5173';
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 try {
   const page = await browser.newPage({ reducedMotion: 'reduce', viewport: { width: 390, height: 844 } });
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('http://localhost:5173');
-  if ((await page.title()).startsWith('Warning:')) { await page.getByRole('button', { name: 'Continue', exact: true }).click(); await page.waitForLoadState('networkidle'); await page.goto('http://localhost:5173'); }
+  await page.goto(baseURL);
+  if ((await page.title()).startsWith('Warning:')) { await page.getByRole('button', { name: 'Continue', exact: true }).click(); await page.waitForLoadState('networkidle'); await page.goto(baseURL); }
   await page.getByRole('button', { name: 'Open Invitation' }).click();
   const opener = page.getByRole('button', { name: `View ${galleryImages[0].alt}` });
   await opener.click();

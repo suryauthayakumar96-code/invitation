@@ -24,7 +24,9 @@ Deploy the generated `dist` directory to any static hosting provider. No server,
 
 All invitation content lives in `src/data/weddingDetails.js`: names, Tamil heading, dates, ceremony times, location, map URL, photos, gallery captions, invitation wording, WhatsApp and music. Use an ISO timestamp with `+05:30` for the start and end; keep the human-readable date and muhurtham in sync. The countdown and downloadable calendar use the timestamps. Times displayed are India Standard Time.
 
-WhatsApp is hidden as requested. Set `whatsappNumber` to a full international number (digits only) to enable the RSVP, wishes and floating WhatsApp links. No RSVP is silently sent or stored; the guest reviews the prefilled message in WhatsApp.
+WhatsApp RSVP is enabled. Set `whatsappNumber` to the recipient's full international number (digits only). The RSVP form prepares a message with the guest's name, party size and optional note; the guest completes delivery by tapping Send in WhatsApp. The wishes link and floating WhatsApp button use the same recipient. No RSVP is stored on this static website.
+
+The invitation also includes a couple-story scene with scroll-linked photo movement, staggered heading reveals, a drawn heart flourish, desktop photo tilt, subtle light particles and a scroll-progress indicator. Reduced-motion settings disable decorative movement. No additional animation dependencies are required.
 
 The default Maps link searches the supplied venue name; replace `mapUrl` with the exact verified venue pin before sharing widely.
 
