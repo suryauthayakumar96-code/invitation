@@ -18,7 +18,7 @@ export const weddingDetails = {
   gallery: [
     { src: '/photos/couple-road-ride.jpg', alt: 'Surya and Kuralarasi together on a motorcycle along a tree-lined road', caption: 'Every journey is better with you', shape: 'landscape', aspectRatio: '1600 / 1067' },
     { src: '/photos/couple-saree-breeze.jpg', alt: 'Surya and Kuralarasi beside a motorcycle with her saree flowing in the breeze', caption: 'A little breeze, a lifetime of love', shape: 'landscape', aspectRatio: '1600 / 1067' },
-    { src: '/photos/couple-temple-walk.jpg', alt: 'Surya and Kuralarasi smiling at each other and holding hands in a temple courtyard', caption: ' always My person. My always.', shape: 'portrait', aspectRatio: '1067 / 1600' },
+    { src: '/photos/couple-temple-walk.jpg', alt: 'Surya and Kuralarasi smiling at each other and holding hands in a temple courtyard', caption: ' My person. My always.', shape: 'portrait', aspectRatio: '1067 / 1600' },
     { src: '/photos/couple-holding-hands.jpg', alt: 'Surya and Kuralarasi holding hands beneath the trees', caption: 'Hand in hand,', shape: 'portrait', aspectRatio: '1067 / 1600' },
     { src: '/photos/couple-garden.jpg.jpeg', alt: 'Surya and Kuralarasi sitting together in a leafy garden', caption: 'Together is our favourite place', shape: 'portrait', aspectRatio: '1067 / 1600' },
   ],
