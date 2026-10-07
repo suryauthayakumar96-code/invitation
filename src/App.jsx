@@ -7,10 +7,10 @@ import SaveTheDate from './components/SaveTheDate';
 import CoupleSection from './components/CoupleSection';
 import LoveStory from './components/LoveStory';
 import { ReadingProgress } from './components/CinematicDetails';
-import TempleSection from './components/TempleSection';
+
 import WeddingDetails from './components/WeddingDetails';
 import Gallery from './components/Gallery';
-import BlessingsSection from './components/BlessingsSection';
+
 import LocationSection from './components/LocationSection';
 import RSVPSection from './components/RSVPSection';
 import Footer from './components/Footer';
@@ -30,5 +30,5 @@ export default function App() {
   useEffect(() => { document.title = `${d.groom} & ${d.bride} — Our Wedding`; }, []);
   const open = () => { music.play(); setOpened(true); window.scrollTo(0, 0); };
   if (!ready) return <LoadingScreen/>;
-  return <MotionConfig reducedMotion="user"><AnimatePresence>{!opened && <WelcomeScreen key="welcome" onOpen={open}/>}</AnimatePresence>{opened && <><ReadingProgress/><a href="#main" className="skip-link">Skip to invitation</a><header className="site-header"><a className="monogram" href="#home" aria-label="Back to top">{d.groom[0]}<span>&</span>{d.bride[0]}<i/></a><nav aria-label="Main navigation"><a href="#couple">Our story</a><a href="#celebration">The celebration</a><a href="#venue">The venue</a></nav><a className="header-date" href="#date"><Heart size={12}/><span>{d.date}</span></a></header><main id="main" tabIndex={-1}><HeroSection/><SaveTheDate/><CoupleSection/><LoveStory/><TempleSection/><WeddingDetails/><Gallery/><BlessingsSection/><LocationSection/><RSVPSection/><Footer/></main><MusicControl music={music}/></>}</MotionConfig>;
+  return <MotionConfig reducedMotion="user"><AnimatePresence>{!opened && <WelcomeScreen key="welcome" onOpen={open}/>}</AnimatePresence>{opened && <><ReadingProgress/><a href="#main" className="skip-link">Skip to invitation</a><header className="site-header"><a className="monogram" href="#home" aria-label="Back to top">{d.groom[0]}<span>&</span>{d.bride[0]}<i/></a><nav aria-label="Main navigation"><a href="#couple">Our story</a><a href="#celebration">The celebration</a><a href="#venue">The venue</a></nav><a className="header-date" href="#date"><Heart size={12}/><span>{d.date}</span></a></header><main id="main" tabIndex={-1}><HeroSection/><SaveTheDate/><CoupleSection/><LoveStory/><WeddingDetails/><Gallery/><LocationSection/><RSVPSection/><Footer/></main><MusicControl music={music}/></>}</MotionConfig>;
 }

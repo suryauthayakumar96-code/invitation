@@ -11,14 +11,16 @@ export const weddingDetails = {
   mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sami+Malai+Murugan+Kovil+Thanjavur+Tamil+Nadu',
   // Country code + number, digits only, e.g. 919876543210. Blank uses WhatsApp's contact picker.
   whatsappNumber: '918946075119',
-  music: { src: '', volume: 0.25 }, // e.g. /music/wedding-theme.mp3; blank plays a quiet original ambient melody.
-  photos: { temple: '', groom: '/photos/groom.jpg', bride: '/photos/bride.jpg', couple: '/photos/couple-together.png' },
+  music: { src: '/music/wedding-theme.mpeg', volume: 0.25 },
+  photos: { temple: '', groom: '', bride: '', portrait: '/photos/couple-temple.jpg', portraitAspectRatio: '1066 / 1600', couple: '/photos/couple-motorbike.jpg', coupleAspectRatio: '1600 / 1067' },
   // Original illustration assets; actual venue photos belong in photos.temple.
   artwork: { temple: '/artwork/temple-garden.webp', templeSmall: '/artwork/temple-garden-mobile.webp', templeWide: '/artwork/temple-garden-wide.webp' },
   gallery: [
-    { src: '/photos/couple-journey.png', alt: 'Illustration of us together at a railway station', caption: 'Every journey is better with you', shape: 'portrait', aspectRatio: '1145 / 1374' },
-    { src: '/photos/couple-cafe.png', alt: 'Illustration of us sharing a moment at a café', caption: 'The joy in the little things', shape: 'square', aspectRatio: '1 / 1' },
-    { src: '/photos/couple-together.png', alt: 'Illustration of us smiling together beside a blue doorway', caption: 'Together is our favourite place', shape: 'landscape', aspectRatio: '1448 / 1086' },
+    { src: '/photos/couple-road-ride.jpg', alt: 'Surya and Kuralarasi together on a motorcycle along a tree-lined road', caption: 'Every journey is better with you', shape: 'landscape', aspectRatio: '1600 / 1067' },
+    { src: '/photos/couple-saree-breeze.jpg', alt: 'Surya and Kuralarasi beside a motorcycle with her saree flowing in the breeze', caption: 'A little breeze, a lifetime of love', shape: 'landscape', aspectRatio: '1600 / 1067' },
+    { src: '/photos/couple-temple-walk.jpg', alt: 'Surya and Kuralarasi smiling at each other and holding hands in a temple courtyard', caption: 'Hand in hand, always', shape: 'portrait', aspectRatio: '1067 / 1600' },
+    { src: '/photos/couple-holding-hands.jpg', alt: 'Surya and Kuralarasi holding hands beneath the trees', caption: 'My person. My always.', shape: 'portrait', aspectRatio: '1067 / 1600' },
+    { src: '/photos/couple-garden.jpg.jpeg', alt: 'Surya and Kuralarasi sitting together in a leafy garden', caption: 'Together is our favourite place', shape: 'portrait', aspectRatio: '1067 / 1600' },
   ],
   copy: {
     storyHeading: 'My favourite place is next to you.',
